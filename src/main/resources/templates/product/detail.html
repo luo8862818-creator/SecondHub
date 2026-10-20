@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>商品详情 - SecondHub</title>
+
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/layout.css}" />
+    <link rel="stylesheet" th:href="@{/css/components/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/pages/product-detail.css}" />
+    <script th:src="@{/js/pages/product-gallery.js}" defer></script>
+    <!-- 图片点击放大 -->
+    <script th:src="@{/js/pages/product-image-viewer.js}" defer></script>
+  </head>
+  <body>
+    <header th:replace="~{fragments/header :: siteHeader}"></header>
+
+    <main class="container detail-container">
+      <a class="back-link" th:href="@{/}">← 返回首页</a>
+
+      <section class="product-detail">
+        <!-- 商品媒体区域：视频在上，图片在下 -->
+        <section class="product-media-gallery">
+          <!-- 视频轮播 -->
+          <section
+            class="media-carousel video-carousel"
+            th:if="${!#lists.isEmpty(videoList)}"
+            data-carousel
+          >
+            <h2 class="media-section-title">商品视频</h2>
+
+            <div class="carousel-stage">
+              <div class="carousel-track">
+                <div class="carousel-slide" th:each="media : ${videoList}">
+                  <video controls preload="metadata">
+                    <source
+                      th:src="@{/media/{name}(name=${media.storedFileName})}"
+                      th:type="${media.contentType}"
+                    />
+                    当前浏览器不支持视频播放。
+                  </video>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="carousel-arrow carousel-prev"
+                aria-label="上一个视频"
+                data-direction="-1"
+              >
+                &#10094;
+              </button>
+
+              <button
+                type="button"
+                class="carousel-arrow carousel-next"
+                aria-label="下一个视频"
+                data-direction="1"
+              >
+                &#10095;
+              </button>
+            </div>
+
+            <p class="carousel-counter" aria-live="polite"></p>
+          </section>
+
+          <!-- 图片轮播 -->
+          <section
+            class="media-carousel image-carousel"
+            th:if="${!#lists.isEmpty(imageList)}"
+            data-carousel
+          >
+            <h2 class="media-section-title">商品图片</h2>
+
+            <div class="carousel-stage">
+              <div class="carousel-track">
+                <div class="carousel-slide" th:each="media : ${imageList}">
+                  <img
+                    th:src="@{/media/{name}(name=${media.storedFileName})}"
+                    th:alt="${product.name}"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="carousel-arrow carousel-prev"
+                aria-label="上一张图片"
+                data-direction="-1"
+              >
+                &#10094;
+              </button>
+
+              <button
+                type="button"
+                class="carousel-arrow carousel-next"
+                aria-label="下一张图片"
+                data-direction="1"
+              >
+                &#10095;
+              </button>
+            </div>
+
+            <p class="carousel-counter" aria-live="polite"></p>
+          </section>
+
+          <!-- 没有任何图片或视频时显示 -->
+          <div
+            class="detail-image-placeholder"
+            th:if="${#lists.isEmpty(imageList) and #lists.isEmpty(videoList)}"
+          >
+            暂无商品图片或视频
+          </div>
+        </section>
+
+        <div class="detail-info">
+          <h1 th:text="${product.name}">商品名称</h1>
+
+          <p class="detail-price">¥<span th:text="${product.price}">0</span></p>
+
+          <div class="detail-meta">
+            <p>
+              商品成色：
+              <span th:text="${product.condition}">九成新</span>
+            </p>
+
+            <p>
+              商品编号：
+              <span th:text="${product.id}">0</span>
+            </p>
+
+            <!-- 商品发布时间 -->
+            <p th:if="${product.createdAt != null}">
+              发布时间：
+              <span
+                th:text="${#temporals.format(product.createdAt, 'yyyy-MM-dd HH:mm')}"
+              >
+                2026-10-19 10:00
+              </span>
+            </p>
+
+            <!-- 商品最近更新时间 -->
+            <p th:if="${product.updatedAt != null}">
+              最近更新时间：
+              <span
+                th:text="${#temporals.format(product.updatedAt, 'yyyy-MM-dd HH:mm')}"
+              >
+                2026-10-19 12:00
+              </span>
+            </p>
+
+            <p>
+              商品分类：
+              <span
+                th:text="${product.category != null && !product.category.isBlank()
+                  ? product.category : '未分类'}"
+                >数码产品</span
+              >
+            </p>
+          </div>
+
+          <section class="detail-description">
+            <h2>商品描述</h2>
+            <p th:text="${product.description}">商品描述内容</p>
+          </section>
+
+          <div class="detail-actions">
+            <a
+              class="edit-button"
+              th:href="@{/products/{id}/edit(id=${product.id})}"
+            >
+              编辑商品
+            </a>
+
+            <form
+              class="delete-form"
+              th:action="@{/products/{id}/delete(id=${product.id})}"
+              method="post"
+              onsubmit="
+                return confirm('确定要删除这件商品吗？删除后无法恢复。');
+              "
+            >
+              <button type="submit" class="delete-button">删除商品</button>
+            </form>
+
+            <button type="button" class="buy-button" disabled>
+              购买功能后续开发
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 图片放大预览层 -->
+    <div id="imageViewer" class="image-viewer" aria-hidden="true">
+      <button type="button" class="image-viewer-close" aria-label="关闭预览">
+        &times;
+      </button>
+
+      <button
+        type="button"
+        class="image-viewer-arrow image-viewer-prev"
+        aria-label="上一张图片"
+      >
+        &#10094;
+      </button>
+
+      <img id="imageViewerImage" src="" alt="商品图片大图" />
+
+      <button
+        type="button"
+        class="image-viewer-arrow image-viewer-next"
+        aria-label="下一张图片"
+      >
+        &#10095;
+      </button>
+
+      <p id="imageViewerCounter" class="image-viewer-counter"></p>
+    </div>
+
+    <script th:src="@{/js/pages/product-image-viewer.js}" defer></script>
+  </body>
+</html>

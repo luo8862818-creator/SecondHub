@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+
+spring:
+  application:
+    name: SecondHub
+
+
+  servlet:
+    multipart:
+      # 单个文件最大 100 MB
+      max-file-size: 100MB
+
+      # 一次请求中所有文件及表单数据最大 160 MB
+      max-request-size: 160MB
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+  datasource:
+    url: jdbc:mariadb://127.0.0.1:3307/secondhub
+    username: secondhub_app
+    password: "vs@jx@2021"
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+
+# 商品图片和视频上传配置
+app:
+  media:
+    # 媒体文件存储目录
+    storage-dir: ${user.home}/secondhub/uploads
+
+

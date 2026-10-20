@@ -1,0 +1,20 @@
+/* 商品列表为空时的提示区域 */
+.empty-state {
+    padding: 60px 20px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+}
+
+.empty-state h3 {
+    margin: 0 0 12px;
+    font-size: 20px;
+    color: #334155;
+}
+
+.empty-state p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}

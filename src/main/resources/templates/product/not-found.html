@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>商品不存在 - SecondHub</title>
+
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/layout.css}" />
+    <link rel="stylesheet" th:href="@{/css/components/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/pages/not-found.css}" />
+  </head>
+  <body>
+    <header th:replace="~{fragments/header :: siteHeader}"></header>
+
+    <main class="container not-found-container">
+      <section class="not-found-card">
+        <div class="not-found-code">404</div>
+
+        <h1>商品不存在</h1>
+
+        <p>你访问的商品可能已经被删除，或者商品链接有误。</p>
+
+        <a class="home-button" th:href="@{/}"> 返回首页 </a>
+      </section>
+    </main>
+  </body>
+</html>

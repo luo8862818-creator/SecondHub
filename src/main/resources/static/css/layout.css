@@ -1,0 +1,13 @@
+/* 公共内容容器 */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 页面主体 */
+.main-container {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}

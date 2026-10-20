@@ -1,0 +1,26 @@
+.site-header {
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 72px;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-menu a:hover {
+    color: #2563eb;
+}

@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SecondHub 二手交易平台</title>
+    <!-- 1. 全局基础样式 -->
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+
+    <!-- 2. 公共布局 -->
+    <link rel="stylesheet" th:href="@{/css/layout.css}" />
+
+    <!-- 3. 公共组件 -->
+    <link rel="stylesheet" th:href="@{/css/components/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/components/product-card.css}" />
+
+    <!-- 4. 首页专属样式 -->
+    <link rel="stylesheet" th:href="@{/css/pages/home.css}" />
+
+    <link rel="stylesheet" th:href="@{/css/components/empty-state.css}" />
+    <script th:src="@{/js/pages/home.js}" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <header th:replace="~{fragments/header :: siteHeader}"></header>
+    </header>
+
+    <main class="container main-container">
+      <div
+        class="success-message"
+        id="successMessage"
+        th:if="${successMessage != null}"
+        th:text="${successMessage}"
+      ></div>
+
+      <section class="page-heading">
+        <h1>发现二手好物</h1>
+        <p>让闲置物品找到新的主人</p>
+      </section>
+
+      <section class="product-section">
+        <h2>最新发布</h2>
+
+        <!-- 商品搜索与分类筛选 -->
+        <section class="product-search">
+          <form class="search-form" th:action="@{/}" method="get">
+            <input
+              type="search"
+              name="keyword"
+              placeholder="搜索商品名称..."
+              th:value="${keyword}"
+              aria-label="搜索商品名称"
+            />
+
+            <select name="category" aria-label="商品分类">
+              <option value="">全部分类</option>
+
+              <option value="数码产品" th:selected="${category == '数码产品'}">
+                数码产品
+              </option>
+
+              <option value="游戏设备" th:selected="${category == '游戏设备'}">
+                游戏设备
+              </option>
+
+              <option value="学习用品" th:selected="${category == '学习用品'}">
+                学习用品
+              </option>
+
+              <option value="生活用品" th:selected="${category == '生活用品'}">
+                生活用品
+              </option>
+
+              <option value="其他" th:selected="${category == '其他'}">
+                其他
+              </option>
+            </select>
+
+            <button type="submit">搜索</button>
+
+            <a th:href="@{/}" class="search-reset">重置</a>
+          </form>
+        </section>
+
+        <div class="product-grid" th:if="${not #lists.isEmpty(products)}">
+          <article class="product-card" th:each="product : ${products}">
+            <a
+              class="product-card-link"
+              th:href="@{/products/{id}(id=${product.id})}"
+            >
+              <div class="product-image">
+                <span>商品图片</span>
+              </div>
+
+              <div class="product-info">
+                <h3 th:text="${product.name}">默认商品名称</h3>
+
+                <div
+                  class="product-category"
+                  th:text="${product.category != null && !product.category.isBlank()
+                    ? product.category : '未分类'}"
+                >
+                  数码产品
+                </div>
+
+                <p class="product-price">
+                  ¥<span th:text="${product.price}">0</span>
+                </p>
+
+                <p class="product-id">
+                  商品编号：
+                  <span th:text="${product.id}">0</span>
+                </p>
+              </div>
+            </a>
+          </article>
+        </div>
+
+        <!-- 搜索无结果提示 -->
+        <section class="empty-result" th:if="${productPage.empty}">
+          <div class="empty-result-icon">
+            <span>暂无商品</span>
+          </div>
+
+          <h3>没有找到符合条件的商品</h3>
+
+          <p>试试更换搜索关键词或选择其他分类。</p>
+
+          <a th:href="@{/}" class="empty-result-reset"> 查看全部商品 </a>
+        </section>
+
+        <!-- 商品分页导航 -->
+        <nav
+          class="pagination"
+          th:if="${productPage.totalPages > 1}"
+          aria-label="商品分页"
+        >
+          <!-- 上一页 -->
+          <a
+            th:if="${productPage.hasPrevious()}"
+            th:href="@{/(page=${productPage.number - 1}, keyword=${keyword}, category=${category})}"
+            class="page-link"
+          >
+            上一页
+          </a>
+
+          <!-- 当前页附近的页码 -->
+          <th:block
+            th:each="pageNumber : ${#numbers.sequence(
+            T(java.lang.Math).max(0, productPage.number - 2),
+            T(java.lang.Math).min(productPage.totalPages - 1, productPage.number + 2)
+            )}"
+          >
+            <a
+              th:href="@{/(page=${pageNumber}, keyword=${keyword}, category=${category})}"
+              th:text="${pageNumber + 1}"
+              th:classappend="${pageNumber == productPage.number} ? ' active' : ''"
+              class="page-link"
+            >
+              1
+            </a>
+          </th:block>
+
+          <!-- 下一页 -->
+          <a
+            th:if="${productPage.hasNext()}"
+            th:href="@{/(page=${productPage.number + 1}, keyword=${keyword}, category=${category})}"
+            class="page-link"
+          >
+            下一页
+          </a>
+        </nav>
+
+        <!-- 没有商品时，显示提示 -->
+        <div class="empty-state" th:if="${#lists.isEmpty(products)}">
+          <h3>暂无商品</h3>
+          <p>目前还没有发布商品，稍后再来看看吧。</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

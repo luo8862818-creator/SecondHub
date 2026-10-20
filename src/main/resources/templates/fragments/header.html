@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<header class="site-header"
+        th:fragment="siteHeader">
+
+    <div class="container header-container">
+        <div class="logo">SecondHub</div>
+
+        <nav class="nav-menu">
+            <a th:href="@{/}">首页</a>
+            <a th:href="@{/products/publish}">发布商品</a>
+            <a href="#">我的商品</a>
+            <a href="#">登录</a>
+        </nav>
+    </div>
+
+</header>
+
+</body>
+</html>

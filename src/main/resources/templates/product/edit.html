@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>编辑商品 - SecondHub</title>
+
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/layout.css}" />
+    <link rel="stylesheet" th:href="@{/css/components/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/pages/publish.css}" />
+  </head>
+  <body>
+    <header th:replace="~{fragments/header :: siteHeader}"></header>
+
+    <main class="container publish-container">
+      <section class="publish-heading">
+        <h1>编辑商品</h1>
+        <p>修改商品信息后保存。</p>
+      </section>
+
+      <form
+        class="publish-form"
+        th:action="@{/products/{id}/edit(id=${product.id})}"
+        th:object="${productCreateRequest}"
+        method="post"
+      >
+        <div class="form-group">
+          <label for="name">商品名称</label>
+          <input
+            type="text"
+            id="name"
+            th:field="*{name}"
+            maxlength="100"
+            required
+          />
+
+          <p
+            class="field-error"
+            th:if="${#fields.hasErrors('name')}"
+            th:errors="*{name}"
+          ></p>
+        </div>
+
+        <div class="form-group">
+          <label for="price">商品价格（元）</label>
+          <input
+            type="number"
+            id="price"
+            th:field="*{price}"
+            min="1"
+            step="1"
+            required
+          />
+
+          <p
+            class="field-error"
+            th:if="${#fields.hasErrors('price')}"
+            th:errors="*{price}"
+          ></p>
+        </div>
+
+        <div class="form-group">
+          <label for="condition">商品成色</label>
+          <select id="condition" th:field="*{condition}" required>
+            <option value="">请选择商品成色</option>
+            <option value="全新">全新</option>
+            <option value="九成新">九成新</option>
+            <option value="八成新">八成新</option>
+            <option value="七成新及以下">七成新及以下</option>
+          </select>
+
+          <p
+            class="field-error"
+            th:if="${#fields.hasErrors('condition')}"
+            th:errors="*{condition}"
+          ></p>
+        </div>
+
+        <!-- 商品分类 -->
+        <div class="form-group">
+          <label for="category">商品分类</label>
+
+          <select id="category" name="category" required>
+            <option value="">请选择商品分类</option>
+
+            <option
+              value="数码产品"
+              th:selected="${product.category == '数码产品'}"
+            >
+              数码产品
+            </option>
+
+            <option
+              value="游戏设备"
+              th:selected="${product.category == '游戏设备'}"
+            >
+              游戏设备
+            </option>
+
+            <option
+              value="学习用品"
+              th:selected="${product.category == '学习用品'}"
+            >
+              学习用品
+            </option>
+
+            <option
+              value="生活用品"
+              th:selected="${product.category == '生活用品'}"
+            >
+              生活用品
+            </option>
+
+            <option value="其他" th:selected="${product.category == '其他'}">
+              其他
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="description">商品描述</label>
+          <textarea
+            id="description"
+            th:field="*{description}"
+            rows="6"
+            maxlength="2000"
+            required
+          ></textarea>
+
+          <p
+            class="field-error"
+            th:if="${#fields.hasErrors('description')}"
+            th:errors="*{description}"
+          ></p>
+        </div>
+
+        <div class="form-actions">
+          <a
+            class="cancel-button"
+            th:href="@{/products/{id}(id=${product.id})}"
+          >
+            取消
+          </a>
+
+          <button class="submit-button" type="submit">保存修改</button>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

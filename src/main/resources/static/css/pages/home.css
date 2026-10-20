@@ -1,0 +1,244 @@
+/* 商品搜索区域 */
+.product-search {
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
+}
+
+/* 搜索表单：紧凑横向布局 */
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 520px;
+}
+
+/* 搜索输入框 */
+.search-form input {
+  flex: 1;
+  min-width: 0;
+  height: 38px;
+  box-sizing: border-box;
+  padding: 0 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  color: #0f172a;
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.search-form input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+/* 搜索按钮 */
+.search-form button {
+  flex-shrink: 0;
+  height: 38px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  background: #1d4ed8;
+}
+
+/* 重置链接 */
+.search-reset {
+  flex-shrink: 0;
+  padding: 8px 4px;
+  color: #64748b;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.search-reset:hover {
+  color: #2563eb;
+}
+
+/* 首页商品网格布局 */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+/* 商品分类标签 */
+.product-category {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* 商品分类下拉框 */
+.search-form select {
+  flex-shrink: 0;
+  width: 130px;
+  height: 38px;
+  padding: 0 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  color: #334155;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.search-form select:focus {
+  border-color: #2563eb;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+/* 商品分页导航 */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.page-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #334155;
+  font-size: 14px;
+  text-decoration: none;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+.page-link:hover {
+  border-color: #2563eb;
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.page-info {
+  color: #64748b;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* 当前页码 */
+.page-link.active {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #fff;
+  pointer-events: none;
+}
+
+/* 页码链接悬停 */
+.pagination .page-link:hover {
+  border-color: #2563eb;
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+/* 当前页保持选中样式 */
+.pagination .page-link.active:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+/* 商品搜索无结果区域 */
+.empty-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 220px;
+  margin: 24px 0;
+  padding: 28px 20px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+  text-align: center;
+}
+
+/* 空结果提示标题 */
+.empty-result h3 {
+  margin: 0;
+  color: #334155;
+  font-size: 18px;
+}
+
+/* 空结果说明 */
+.empty-result p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* 返回全部商品 */
+.empty-result-reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  padding: 9px 16px;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.empty-result-reset:hover {
+  background: #1d4ed8;
+}
+
+@media (max-width: 480px) {
+  .pagination {
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .page-link {
+    padding: 0 10px;
+  }
+}
+
+/* 平板：两列 */
+@media (max-width: 900px) {
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+/* 手机：一列 */
+@media (max-width: 600px) {
+  .product-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+}

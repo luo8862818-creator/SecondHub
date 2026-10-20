@@ -1,0 +1,433 @@
+
+.detail-container {
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: #475569;
+}
+
+.back-link:hover {
+    color: #2563eb;
+}
+
+/* 商品详情整体布局 */
+.product-detail {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+}
+
+/* 商品图片区域 */
+.detail-image {
+    min-height: 320px;
+    background: #e9edf3;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+}
+
+/* 商品基本信息 */
+.detail-info h1 {
+    margin-top: 0;
+    font-size: 28px;
+}
+
+.detail-price {
+    color: #ef4444;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.detail-id {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.detail-meta {
+    margin-top: 24px;
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.detail-meta p {
+    margin: 8px 0;
+    color: #475569;
+    font-size: 14px;
+}
+
+/* 商品描述 */
+.detail-description {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.detail-description h2 {
+    margin: 0 0 12px;
+    font-size: 18px;
+}
+
+.detail-description p {
+    margin: 0;
+    color: #64748b;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+/* 商品操作区域：编辑、删除、购买 */
+.detail-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* 三种操作按钮统一尺寸与对齐 */
+.detail-actions .edit-button,
+.detail-actions .delete-button,
+.detail-actions .buy-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 46px;
+    padding: 12px 20px;
+    margin: 0;
+    border-radius: 8px;
+    font: inherit;
+    line-height: 20px;
+    white-space: nowrap;
+}
+
+/* 编辑按钮 */
+.detail-actions .edit-button {
+    border: 1px solid #2563eb;
+    background: #fff;
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.detail-actions .edit-button:hover {
+    background: #eff6ff;
+}
+
+/* 删除表单 */
+.detail-actions .delete-form {
+    display: flex;
+    margin: 0;
+}
+
+/* 删除按钮 */
+.detail-actions .delete-button {
+    border: 1px solid #dc2626;
+    background: #fff;
+    color: #dc2626;
+    cursor: pointer;
+}
+
+.detail-actions .delete-button:hover {
+    background: #fef2f2;
+}
+
+/* 购买按钮：功能暂未实现 */
+.detail-actions .buy-button {
+    border: 1px solid #2563eb;
+    background: #2563eb;
+    color: #fff;
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+/* 商品图片区域 */
+.detail-gallery {
+    min-width: 0;
+}
+
+.detail-image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.detail-image-item {
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #f1f5f9;
+}
+
+.detail-image-item img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+}
+
+.detail-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 320px;
+    border-radius: 8px;
+    background: #e9edf3;
+    color: #64748b;
+}
+
+/* 商品视频 */
+.detail-videos {
+    margin-top: 24px;
+}
+
+.detail-videos h2 {
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.detail-video-item video {
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    max-height: 400px;
+    border-radius: 8px;
+    background: #0f172a;
+}
+
+
+/* 商品媒体整体区域 */
+.product-media-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    min-width: 0;
+}
+
+/* 单独的视频或图片轮播 */
+.media-carousel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+}
+
+.media-section-title {
+    margin: 0;
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* 轮播显示区域 */
+.carousel-stage {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 12px;
+    background: #f1f5f9;
+}
+
+/* 横向排列的轮播轨道 */
+.carousel-track {
+    display: flex;
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+/* 每一页占据完整的显示宽度 */
+.carousel-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 图片 */
+.image-carousel .carousel-slide {
+    height: 360px;
+}
+
+.image-carousel .carousel-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 视频 */
+.video-carousel .carousel-slide {
+    height: 300px;
+}
+
+.video-carousel .carousel-slide video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #0f172a;
+}
+
+/* 中间两侧的切换箭头 */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.72);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: background 0.2s;
+}
+
+.carousel-arrow:hover {
+    background: #2563eb;
+}
+
+.carousel-prev {
+    left: 12px;
+}
+
+.carousel-next {
+    right: 12px;
+}
+
+.carousel-arrow[hidden] {
+    display: none;
+}
+
+/* 当前页码 */
+.carousel-counter {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+    text-align: center;
+}
+
+
+/* 图片支持点击放大 */
+.image-carousel .carousel-slide img {
+    cursor: zoom-in;
+}
+
+/* 全屏图片预览层 */
+.image-viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 80px;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.image-viewer.is-open {
+    display: flex;
+}
+
+.image-viewer > img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    cursor: zoom-out;
+}
+
+.image-viewer-close,
+.image-viewer-arrow {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    cursor: pointer;
+}
+
+.image-viewer-close {
+    top: 20px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    font-size: 32px;
+}
+
+.image-viewer-arrow {
+    top: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+    transform: translateY(-50%);
+}
+
+.image-viewer-prev {
+    left: 24px;
+}
+
+.image-viewer-next {
+    right: 24px;
+}
+
+.image-viewer-close:hover,
+.image-viewer-arrow:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.image-viewer-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .image-viewer {
+        padding: 60px 44px;
+    }
+
+    .image-viewer-arrow {
+        width: 34px;
+        height: 34px;
+        font-size: 16px;
+    }
+
+    .image-viewer-prev {
+        left: 6px;
+    }
+
+    .image-viewer-next {
+        right: 6px;
+    }
+}
+
